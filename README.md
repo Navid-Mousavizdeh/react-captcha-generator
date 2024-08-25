@@ -34,36 +34,41 @@ yarn add navid-react-captcha-generator
 Here’s a basic example of how to use the `Captcha` component:
 
 ```jsx
-import React, { useState } from "react";
-import Captcha from "navid-react-captcha-generator";
+import { useState } from "react";
+import { Captcha } from "navid-react-captcha-generator";
 
-const App = () => {
-  const [captcha, setCaptcha] = useState("");
+function App() {
+  const [captchaValue, setCaptchaValue] = useState("");
+  const [regenerate, setRegenerate] = useState(false);
+
+  const handleCaptchaChange = (value: string) => {
+    setCaptchaValue(value);
+  };
+
+  const regenerateCaptcha = () => {
+    setRegenerate((prev) => !prev);
+  };
 
   return (
     <div>
       <Captcha
-        width={250}
-        height={70}
-        length={6}
-        fontSize={36}
-        bgColor="#f0f0f0"
-        textColor="#333"
+        onChange={handleCaptchaChange}
+        regenerate={regenerate}
+        width={200}
+        height={50}
+        length={5}
+        fontSize={24}
+        bgColor="#fff"
+        textColor="#000"
         noise={true}
-        noiseColor="#999"
-        noiseDensity={0.1}
         lines={true}
-        lineColor="#666"
-        lineWidth={2}
         distortion={true}
-        distortionAmount={6}
-        onChange={(value) => setCaptcha(value)}
-        regenerate={false}
       />
-      <p>Captcha Value: {captcha}</p>
+      <p>Captcha Value: {captchaValue}</p>
+      <button onClick={regenerateCaptcha}>Regenerate Captcha</button>
     </div>
   );
-};
+}
 
 export default App;
 ```
@@ -87,7 +92,7 @@ export default App;
 | `distortion`       | `boolean`                                              | `true`      | Whether to apply distortion effects to the CAPTCHA.                                               |
 | `distortionAmount` | `number`                                               | `4`         | Amount of distortion applied.                                                                     |
 | `onChange`         | `(captcha: string) => void`                            | `undefined` | Callback function that is called when the CAPTCHA value changes.                                  |
-| `regenerate`       | `boolean`                                              | `false`     | triggers CAPTCHA regeneration by changing false and true.                                                         |
+| `regenerate`       | `boolean`                                              | `false`     | triggers CAPTCHA regeneration by changing false and true.                                         |
 | `charStyles`       | `{ [key: number]: { size?: number; color?: string } }` | `{}`        | Individual styles for each character, including size and color.                                   |
 
 ## Examples
