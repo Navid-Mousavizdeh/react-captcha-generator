@@ -90,7 +90,7 @@ export default App;
 
 ### Example 1: Basic Usage
 
-![Example 1](assets/sample-1.png)
+![Example 1](https://github.com/Navid-Mousavizdeh/react-captcha-generator/blob/main/assets/sample-1.png?raw=true)
 
 ```jsx
 <Captcha
@@ -108,7 +108,7 @@ export default App;
 
 ### Example 2: Custom Colors and Noise
 
-![Example 2](assets/sample-2.png)
+![Example 2](https://github.com/Navid-Mousavizdeh/react-captcha-generator/blob/main/assets/sample-2.png?raw=true)
 
 ```jsx
 <Captcha
@@ -130,7 +130,7 @@ export default App;
 
 ### Example 3: Individual Character Styles
 
-![Example 3](assets/sample-3.png)
+![Example 3](https://github.com/Navid-Mousavizdeh/react-captcha-generator/blob/main/assets/sample-3.png?raw=true)
 
 ```jsx
 <Captcha
@@ -156,7 +156,7 @@ export default App;
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/Navid-Mousavizdeh/react-captcha-generator/blob/main/LICENSE) file for details.
 
 ## Author
 
