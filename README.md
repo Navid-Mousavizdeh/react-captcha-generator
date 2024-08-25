@@ -16,13 +16,13 @@ A customizable CAPTCHA component for React, allowing various styles and configur
 To install the package via npm:
 
 ```bash
-npm install react-captcha-generator
+npm install navid-react-captcha-generator
 ```
 
 Or with yarn:
 
 ```bash
-yarn add react-captcha-generator
+yarn add navid-react-captcha-generator
 ```
 
 ## Usage
@@ -31,7 +31,7 @@ Here’s a basic example of how to use the `Captcha` component:
 
 ```jsx
 import React, { useState } from "react";
-import Captcha from "react-captcha-generator";
+import Captcha from "navid-react-captcha-generator";
 
 const App = () => {
   const [captcha, setCaptcha] = useState("");
@@ -161,7 +161,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Author
 
 [Navid Mousavizadeh](https://github.com/Navid-Mousavizdeh)
-
-```
-
-```
