@@ -1,6 +1,4 @@
-// src/Captcha.tsx
 import React, { useEffect, useRef } from "react";
-import { createCanvas, CanvasRenderingContext2D } from "canvas";
 
 interface CaptchaProps {
   width?: number;
@@ -47,8 +45,14 @@ const Captcha: React.FC<CaptchaProps> = ({
   };
 
   const drawCaptcha = (text: string) => {
-    const canvas = createCanvas(width, height);
-    const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    // Clear previous content
+    ctx.clearRect(0, 0, width, height);
 
     // Draw background
     ctx.fillStyle = bgColor;
@@ -101,28 +105,33 @@ const Captcha: React.FC<CaptchaProps> = ({
     if (distortion) {
       const imageData = ctx.getImageData(0, 0, width, height);
       const data = imageData.data;
+      const tempData = new Uint8ClampedArray(data.length);
+
+      // Apply distortion
       for (let y = 0; y < height; y++) {
         for (let x = 0; x < width; x++) {
           const idx = (y * width + x) * 4;
-          const dx = Math.sin(y / 10) * 5; // Sinusoidal distortion
-          const dy = Math.cos(x / 10) * 5;
-          const newIdx = ((y + dy) * width + (x + dx)) * 4;
-          if (newIdx >= 0 && newIdx < data.length) {
-            data[idx] = data[newIdx];
-            data[idx + 1] = data[newIdx + 1];
-            data[idx + 2] = data[newIdx + 2];
-          }
+
+          // Calculate distortion offsets
+          const offsetX = Math.sin(y / 10) * 5; // Sinusoidal distortion effect
+          const offsetY = Math.cos(x / 10) * 5;
+
+          // Calculate new coordinates
+          const newX = Math.min(Math.max(x + offsetX, 0), width - 1);
+          const newY = Math.min(Math.max(y + offsetY, 0), height - 1);
+
+          const newIdx = (Math.floor(newY) * width + Math.floor(newX)) * 4;
+
+          // Copy the pixel color from the distorted position
+          tempData[idx] = data[newIdx];
+          tempData[idx + 1] = data[newIdx + 1];
+          tempData[idx + 2] = data[newIdx + 2];
+          tempData[idx + 3] = data[newIdx + 3];
         }
       }
-      ctx.putImageData(imageData, 0, 0);
-    }
 
-    // Set image source
-    const dataURL = canvas.toDataURL();
-    const image = canvasRef.current;
-    if (image) {
-      //@ts-ignore
-      image.src = dataURL;
+      // Put distorted image data back to canvas
+      ctx.putImageData(new ImageData(tempData, width, height), 0, 0);
     }
   };
 
