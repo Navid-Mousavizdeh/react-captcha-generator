@@ -2,10 +2,17 @@
   "name": "react-captcha-generator",
   "version": "1.0.0",
   "description": "react-captcha-generator is a fully customizable CAPTCHA generator for React applications. It provides advanced image manipulation features like random-sized and distorted letters, background noise, and security lines, making it harder for bots to decipher the CAPTCHA.",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",

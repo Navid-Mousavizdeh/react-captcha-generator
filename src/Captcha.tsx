@@ -6,12 +6,18 @@ interface CaptchaProps {
   length?: number;
   fontSize?: number;
   bgColor?: string;
-  textColor?: string;
+  textColor?: string | string[]; // Single color or array of colors
   noise?: boolean;
+  noiseColor?: string;
+  noiseDensity?: number; // Control the amount of noise
   lines?: boolean;
+  lineColor?: string;
+  lineWidth?: number;
   distortion?: boolean;
+  distortionAmount?: number; // Control the amount of distortion
   onChange?: (captcha: string) => void;
   regenerate?: boolean; // Trigger regeneration when true
+  charStyles?: { [key: number]: { size?: number; color?: string } }; // Individual styles for each character
 }
 
 const Captcha: React.FC<CaptchaProps> = ({
@@ -22,10 +28,16 @@ const Captcha: React.FC<CaptchaProps> = ({
   bgColor = "#ffffff",
   textColor = "#000000",
   noise = true,
+  noiseColor = "#000000",
+  noiseDensity = 0.05,
   lines = true,
+  lineColor = "#000000",
+  lineWidth = 1,
   distortion = true,
+  distortionAmount = 4,
   onChange,
   regenerate = false,
+  charStyles = {},
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -58,29 +70,33 @@ const Captcha: React.FC<CaptchaProps> = ({
     ctx.fillStyle = bgColor;
     ctx.fillRect(0, 0, width, height);
 
-    // Draw distorted text
-    ctx.font = `${fontSize}px sans-serif`;
-    ctx.fillStyle = textColor;
-    ctx.textBaseline = "middle";
-    ctx.textAlign = "center";
-
+    // Draw distorted text with individual character styles
     text.split("").forEach((char, i) => {
       const x = (width / length) * i + fontSize / 2;
       const y = height / 2 + (Math.random() - 0.5) * 10;
       const angle = (Math.random() - 0.5) * 0.5; // Random angle for each letter
       const scale = 0.8 + Math.random() * 0.4; // Random scale for each letter
+      const charStyle = charStyles[i] || {};
+      const charFontSize = charStyle.size || fontSize;
+      const charColor = Array.isArray(textColor)
+        ? textColor[i % textColor.length]
+        : textColor;
+
       ctx.save();
       ctx.translate(x, y);
       ctx.rotate(angle);
       ctx.scale(scale, scale);
+      ctx.font = `${charFontSize}px sans-serif`;
+      ctx.fillStyle = charStyle.color || charColor;
       ctx.fillText(char, 0, 0);
       ctx.restore();
     });
 
     // Add noise
     if (noise) {
-      for (let i = 0; i < 100; i++) {
-        ctx.fillStyle = `rgba(0,0,0,${Math.random()})`;
+      const noiseAmount = Math.floor(width * height * noiseDensity);
+      for (let i = 0; i < noiseAmount; i++) {
+        ctx.fillStyle = noiseColor;
         ctx.fillRect(
           Math.random() * width,
           Math.random() * height,
@@ -92,8 +108,9 @@ const Captcha: React.FC<CaptchaProps> = ({
 
     // Add lines
     if (lines) {
+      ctx.strokeStyle = lineColor;
+      ctx.lineWidth = lineWidth;
       for (let i = 0; i < 5; i++) {
-        ctx.strokeStyle = `rgba(0,0,0,${0.3 + Math.random() * 0.7})`;
         ctx.beginPath();
         ctx.moveTo(Math.random() * width, Math.random() * height);
         ctx.lineTo(Math.random() * width, Math.random() * height);
@@ -113,8 +130,8 @@ const Captcha: React.FC<CaptchaProps> = ({
           const idx = (y * width + x) * 4;
 
           // Calculate distortion offsets
-          const offsetX = Math.sin(y / 10) * 5; // Sinusoidal distortion effect
-          const offsetY = Math.cos(x / 10) * 5;
+          const offsetX = Math.sin(y / 10) * distortionAmount;
+          const offsetY = Math.cos(x / 10) * distortionAmount;
 
           // Calculate new coordinates
           const newX = Math.min(Math.max(x + offsetX, 0), width - 1);
