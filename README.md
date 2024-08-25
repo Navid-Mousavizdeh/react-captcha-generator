@@ -1,6 +1,3 @@
-Here’s a comprehensive `README.md` for your CAPTCHA React component, including usage examples, configuration options, and images of different outputs.
-
-```markdown
 # React CAPTCHA Component
 
 A customizable CAPTCHA component for React, allowing various styles and configurations to protect forms from bots.
@@ -33,11 +30,11 @@ yarn add react-captcha-generator
 Here’s a basic example of how to use the `Captcha` component:
 
 ```jsx
-import React, { useState } from 'react';
-import Captcha from 'react-captcha-generator';
+import React, { useState } from "react";
+import Captcha from "react-captcha-generator";
 
 const App = () => {
-  const [captcha, setCaptcha] = useState('');
+  const [captcha, setCaptcha] = useState("");
 
   return (
     <div>
@@ -69,31 +66,31 @@ export default App;
 
 ## Props
 
-| Prop             | Type                  | Default       | Description                                                                 |
-|------------------|-----------------------|---------------|-----------------------------------------------------------------------------|
-| `width`           | `number`              | `200`         | Width of the CAPTCHA canvas.                                                 |
-| `height`          | `number`              | `50`          | Height of the CAPTCHA canvas.                                                |
-| `length`          | `number`              | `6`           | Number of characters in the CAPTCHA text.                                    |
-| `fontSize`        | `number`              | `30`          | Font size of the CAPTCHA text.                                                |
-| `bgColor`         | `string`              | `#ffffff`     | Background color of the CAPTCHA canvas.                                      |
-| `textColor`       | `string \| string[]`  | `#000000`     | Color of the CAPTCHA text; can be a single color or an array of colors for individual characters. |
-| `noise`           | `boolean`             | `true`        | Whether to add noise to the CAPTCHA.                                          |
-| `noiseColor`      | `string`              | `#000000`     | Color of the noise.                                                            |
-| `noiseDensity`    | `number`              | `0.05`        | Density of the noise; control how much noise is added.                        |
-| `lines`           | `boolean`             | `true`        | Whether to add random lines to the CAPTCHA.                                   |
-| `lineColor`       | `string`              | `#000000`     | Color of the lines.                                                            |
-| `lineWidth`       | `number`              | `1`           | Width of the lines.                                                            |
-| `distortion`      | `boolean`             | `true`        | Whether to apply distortion effects to the CAPTCHA.                           |
-| `distortionAmount`| `number`              | `4`           | Amount of distortion applied.                                                 |
-| `onChange`        | `(captcha: string) => void` | `undefined` | Callback function that is called when the CAPTCHA value changes.              |
-| `regenerate`      | `boolean`             | `false`       | When true, triggers CAPTCHA regeneration.                                     |
-| `charStyles`      | `{ [key: number]: { size?: number; color?: string } }` | `{}` | Individual styles for each character, including size and color.                |
+| Prop               | Type                                                   | Default     | Description                                                                                       |
+| ------------------ | ------------------------------------------------------ | ----------- | ------------------------------------------------------------------------------------------------- |
+| `width`            | `number`                                               | `200`       | Width of the CAPTCHA canvas.                                                                      |
+| `height`           | `number`                                               | `50`        | Height of the CAPTCHA canvas.                                                                     |
+| `length`           | `number`                                               | `6`         | Number of characters in the CAPTCHA text.                                                         |
+| `fontSize`         | `number`                                               | `30`        | Font size of the CAPTCHA text.                                                                    |
+| `bgColor`          | `string`                                               | `#ffffff`   | Background color of the CAPTCHA canvas.                                                           |
+| `textColor`        | `string \| string[]`                                   | `#000000`   | Color of the CAPTCHA text; can be a single color or an array of colors for individual characters. |
+| `noise`            | `boolean`                                              | `true`      | Whether to add noise to the CAPTCHA.                                                              |
+| `noiseColor`       | `string`                                               | `#000000`   | Color of the noise.                                                                               |
+| `noiseDensity`     | `number`                                               | `0.05`      | Density of the noise; control how much noise is added.                                            |
+| `lines`            | `boolean`                                              | `true`      | Whether to add random lines to the CAPTCHA.                                                       |
+| `lineColor`        | `string`                                               | `#000000`   | Color of the lines.                                                                               |
+| `lineWidth`        | `number`                                               | `1`         | Width of the lines.                                                                               |
+| `distortion`       | `boolean`                                              | `true`      | Whether to apply distortion effects to the CAPTCHA.                                               |
+| `distortionAmount` | `number`                                               | `4`         | Amount of distortion applied.                                                                     |
+| `onChange`         | `(captcha: string) => void`                            | `undefined` | Callback function that is called when the CAPTCHA value changes.                                  |
+| `regenerate`       | `boolean`                                              | `false`     | triggers CAPTCHA regeneration by changing false and true.                                                         |
+| `charStyles`       | `{ [key: number]: { size?: number; color?: string } }` | `{}`        | Individual styles for each character, including size and color.                                   |
 
 ## Examples
 
 ### Example 1: Basic Usage
 
-![Example 1](images/captcha-basic.png)
+![Example 1](assets/sample-1.png)
 
 ```jsx
 <Captcha
@@ -111,7 +108,7 @@ export default App;
 
 ### Example 2: Custom Colors and Noise
 
-![Example 2](images/captcha-custom-colors.png)
+![Example 2](assets/sample-2.png)
 
 ```jsx
 <Captcha
@@ -119,21 +116,21 @@ export default App;
   height={60}
   length={8}
   fontSize={28}
-  bgColor="#e0e0e0"
-  textColor={['#ff0000', '#00ff00', '#0000ff']}
+  bgColor="#000000"
+  textColor={["#ff0000", "#00ff00", "#0000ff"]}
   noiseColor="#aaaaaa"
   noiseDensity={0.1}
   lines={true}
   lineColor="#cccccc"
   lineWidth={2}
   distortion={true}
-  distortionAmount={8}
+  distortionAmount={6}
 />
 ```
 
 ### Example 3: Individual Character Styles
 
-![Example 3](images/captcha-char-styles.png)
+![Example 3](assets/sample-3.png)
 
 ```jsx
 <Captcha
@@ -147,12 +144,12 @@ export default App;
   lines={false}
   distortion={false}
   charStyles={{
-    0: { size: 40, color: '#ff0000' },
-    1: { size: 30, color: '#00ff00' },
-    2: { size: 35, color: '#0000ff' },
-    3: { size: 32, color: '#ff00ff' },
-    4: { size: 38, color: '#00ffff' },
-    5: { size: 30, color: '#ffff00' },
+    0: { size: 40, color: "#ff0000" },
+    1: { size: 30, color: "#00ff00" },
+    2: { size: 35, color: "#0000ff" },
+    3: { size: 32, color: "#ff00ff" },
+    4: { size: 38, color: "#00ffff" },
+    5: { size: 30, color: "#ffff00" },
   }}
 />
 ```
@@ -161,20 +158,10 @@ export default App;
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Contributing
-
-Contributions are welcome! Please refer to the [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
 ## Author
 
-[Your Name](https://github.com/your-profile)
+[Navid Mousavizadeh](https://github.com/Navid-Mousavizdeh)
 
 ```
 
-### Notes:
-
-1. **Images**: Replace `images/captcha-basic.png`, `images/captcha-custom-colors.png`, and `images/captcha-char-styles.png` with the actual paths to your images demonstrating different CAPTCHA outputs.
-2. **Contributing**: If you have a `CONTRIBUTING.md` file, include guidelines for contributing to the project.
-3. **Author**: Replace `[Your Name](https://github.com/your-profile)` with your actual name and GitHub profile link.
-
-This README provides a thorough overview of the component, including installation instructions, usage examples, and configuration options.
+```
