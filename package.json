@@ -1,6 +1,6 @@
 {
   "name": "navid-react-captcha-generator",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "navid-react-captcha-generator is a fully customizable CAPTCHA generator for React applications. It provides advanced image manipulation features like random-sized and distorted letters, background noise, and security lines, making it harder for bots to decipher the CAPTCHA.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
