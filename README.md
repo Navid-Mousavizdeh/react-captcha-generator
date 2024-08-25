@@ -1,5 +1,9 @@
 # React CAPTCHA Component
 
+![npm](https://img.shields.io/npm/v/navid-react-captcha-generator)
+![npm](https://img.shields.io/npm/dm/navid-react-captcha-generator)
+![License](https://img.shields.io/npm/l/navid-react-captcha-generator)
+
 A customizable CAPTCHA component for React, allowing various styles and configurations to protect forms from bots.
 
 ## Features
